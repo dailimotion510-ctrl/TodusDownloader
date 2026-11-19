@@ -1,0 +1,42 @@
+
+name: Compilar TodusDownloader
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Extraer proyecto
+        run: |
+          unzip -o TodusDownloader-1.zip -d extracted
+
+      - name: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Configurar Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.3.1'
+
+      - name: Compilar APK
+        run: |
+          cd extracted
+          gradle assembleDebug
+
+      - name: Guardar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: TodusDownloader-APK
+          path: extracted/**/build/outputs/apk/**/*.apk
