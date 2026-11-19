@@ -1,0 +1,3 @@
+-keep class cu.todus.downloader.** { *; }
+-keep class okhttp3.** { *; }
+-dontwarn okhttp3.**

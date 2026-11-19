@@ -1,0 +1,13 @@
+{
+  "name": "Android Build",
+  "image": "mingc/android-build-box:latest",
+  "features": {},
+  "postCreateCommand": "chmod +x gradlew",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "mathiasfrohlich.Kotlin"
+      ]
+    }
+  }
+}
